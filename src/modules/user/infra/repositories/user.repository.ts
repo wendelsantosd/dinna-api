@@ -18,7 +18,6 @@ export class UserRepository implements IUserRepository {
 
       return user;
     } catch (error) {
-      console.log(error);
       throw new InternalServerErrorException(
         `Ocorreu um erro ao criar o usuário: ${error}`,
       );
