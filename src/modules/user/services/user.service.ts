@@ -6,7 +6,7 @@ import { User } from '../domain/entities/user.entity';
 @Injectable()
 export class UserService {
   constructor(private createUserUseCase: CreateUserUseCase) {}
-  createUser(data: CreateUserDTO): User {
-    return this.createUserUseCase.execute(data);
+  async createUser(data: CreateUserDTO): Promise<User> {
+    return await this.createUserUseCase.execute(data);
   }
 }
