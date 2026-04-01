@@ -22,12 +22,12 @@ export class CreateUserUseCase {
     name,
     password,
   }: CreateUserInput): Promise<CreateUserOutput> {
+    if (!isValidEmail(email))
+      throw new BadRequestException('Invalid email format');
+
     const userExists = await this.userRepository.findUserByEmail({ email });
 
     if (userExists) throw new BadRequestException('Email is already in use');
-
-    if (!isValidEmail(email))
-      throw new BadRequestException('Invalid email format');
 
     if (!isStrongPassword(password))
       throw new BadRequestException('Choose a strong password');
