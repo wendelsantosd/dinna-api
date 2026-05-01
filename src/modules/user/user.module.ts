@@ -4,22 +4,21 @@ import { UserService } from './services/user.service';
 import { CreateUserUseCase } from './application/usecases/create-user.use-case';
 import { UserRepository } from './infra/repositories/user.repository';
 import { PrismaService } from '../../shared/infra/database/prisma.service';
-import { BcryptService } from '../../shared/infra/encryptation/bcrypt.service';
+import { SharedModule } from 'src/shared/shared.module';
+import { USER_REPOSITORY } from './domain/tokens/user-repository.token';
 
 @Module({
+  imports: [SharedModule],
   controllers: [UserController],
   providers: [
     PrismaService,
     UserService,
     CreateUserUseCase,
     {
-      provide: 'UserRepository',
+      provide: USER_REPOSITORY,
       useClass: UserRepository,
     },
-    {
-      provide: 'BcryptService',
-      useClass: BcryptService,
-    },
   ],
+  exports: [USER_REPOSITORY],
 })
 export class UserModule {}

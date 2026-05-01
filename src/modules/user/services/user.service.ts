@@ -5,7 +5,7 @@ import { User } from '../domain/entities/user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(private createUserUseCase: CreateUserUseCase) {}
+  constructor(private readonly createUserUseCase: CreateUserUseCase) {}
   async createUser(data: CreateUserDTO): Promise<Omit<User, 'password'>> {
     return await this.createUserUseCase.execute(data);
   }

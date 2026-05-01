@@ -7,13 +7,15 @@ import {
 } from '../../../../shared/utils/validate';
 import type { IEncryptation } from '../../../../shared/infra/encryptation/encryptation.service';
 import { CreateUserInput, CreateUserOutput } from './interfaces';
+import { USER_REPOSITORY } from '../../domain/tokens/user-repository.token';
+import { ENCRYPTATION } from 'src/shared/domain/encryptation/tokens/encryptation.tokens';
 
 @Injectable()
 export class CreateUserUseCase {
   constructor(
-    @Inject('UserRepository')
+    @Inject(USER_REPOSITORY)
     private readonly userRepository: IUserRepository,
-    @Inject('BcryptService')
+    @Inject(ENCRYPTATION)
     private readonly bcryptService: IEncryptation,
   ) {}
 
